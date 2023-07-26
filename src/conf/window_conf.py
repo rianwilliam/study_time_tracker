@@ -1,9 +1,8 @@
+from tkinter import Tk
 from flet import Page, ThemeMode
-import flet as ft
-import tkinter as tk
 
 def window_conf(page: Page) -> None:
-    root = tk.Tk()
+    root = Tk()
     root.withdraw()
     screen_width = page.window_width
     screen_height = page.window_height

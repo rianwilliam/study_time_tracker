@@ -1,7 +1,7 @@
 import flet as ft
 import time
 from os.path import dirname
-from src.timelog import save_time
+from src.time_data import save_time
 from src.json_manager import save_in_json
 
 class Timer:
@@ -59,7 +59,6 @@ class Timer:
                 self.hours += 1
                 self.minutes = 0
             self.render_time(self.seconds,self.minutes,self.hours)
-
 
     def widgets(self):
         self.display = ft.Text(value="00:00:00",size=40,color=ft.colors.BLACK)

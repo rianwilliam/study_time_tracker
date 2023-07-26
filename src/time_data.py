@@ -1,14 +1,14 @@
 import os
 import re
+from typing import List
 from datetime import date, timedelta
 from src.json_manager import get_json_data
-from typing import Dict
 
-def format_time(time):
+def format_time(time: str) -> List[int]:
     formatted_time = time.split(":")
     return [int(x) for x in formatted_time]
 
-def sum_time(saved_time: str, time: str):
+def sum_time(saved_time: str, time: str) -> str:
     saved_time = re.findall(r"[0-9]\:[0-9]{2}\:[0-9]{2}", saved_time)[0]
     saved_h, saved_m, saved_s = format_time(saved_time)
     h, m, s = format_time(time)
@@ -22,16 +22,17 @@ def sum_time(saved_time: str, time: str):
 def save_time(time) -> None:
     actual_date = date.today().strftime("%d/%m/%Y")
     json_data = get_json_data()
+    time_file_path = json_data["save_time_dir"]
 
-    if os.path.exists(json_data["save_time_dir"]):
-        with open(json_data["save_time_dir"], "r") as file:
+    if os.path.exists(time_file_path):
+        with open(time_file_path, "r") as file:
             lines = file.readlines()
-            if lines:
-                if actual_date in lines[-1]:
-                    time = sum_time(lines[-1], time)
-                    lines.pop()
-                    with open(json_data["save_time_dir"], "w") as file:
-                        file.writelines(lines)
-
+            most_recent_line = lines[-1]
+            if lines and actual_date in most_recent_line:
+                time = sum_time(most_recent_line, time)
+                lines.pop()
+                with open(time_file_path, "w") as file:
+                    file.writelines(lines)
+                    
     with open(json_data["save_time_dir"], "a") as file:
         file.write(f"{actual_date}: {time} \n")

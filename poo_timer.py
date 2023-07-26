@@ -1,8 +1,7 @@
 import flet as ft
 import time
 from os.path import dirname
-from src.timelog import save_time
-
+from src.time_data import save_time
 
 on = True
 seconds = 0
