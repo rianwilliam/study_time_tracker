@@ -34,5 +34,5 @@ def save_time(time) -> None:
                 with open(time_file_path, "w") as file:
                     file.writelines(lines)
                     
-    with open(json_data["save_time_dir"], "a") as file:
+    with open(time_file_path, "a") as file:
         file.write(f"{actual_date}: {time} \n")

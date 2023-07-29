@@ -1,6 +1,6 @@
 import flet as ft
 import time
-from os.path import dirname
+from os import getcwd
 from src.time_data import save_time
 from src.json_manager import save_in_json
 
@@ -22,8 +22,8 @@ class Timer:
         self.reset_time()
     
     def reset_time(self, e=None) -> None:
-        self.seconds, self.minutes, self.hours = 0,0,0
         self.display.value = "00:00:00"
+        self.seconds, self.minutes, self.hours = 0,0,0
         self.display.update()
         self.change_visibility_widget(self.save_file_btn, visible=False)
 
@@ -50,7 +50,6 @@ class Timer:
         self.change_state_widget(self.start_btn, disabled=True)
 
         while self.on:
-            time.sleep(1)
             self.seconds += 1
             if self.seconds == 60:
                 self.minutes += 1
@@ -58,6 +57,7 @@ class Timer:
             if self.minutes == 60:
                 self.hours += 1
                 self.minutes = 0
+            time.sleep(1)
             self.render_time(self.seconds,self.minutes,self.hours)
 
     def widgets(self):
@@ -122,41 +122,29 @@ class Timer:
 
 def conf_menu(page: ft.Page):
 
-    def open_menu(e) -> None:
-        page.dialog = dialog_menu
-        dialog_menu.open = True
-        page.update()
-
-    def close_menu(e) -> None:
-        dialog_menu.open = False
-        page.update()
-
     directory_selector = ft.FilePicker()
     directory_selector.on_result = lambda _: save_in_json({"save_time_dir": directory_selector.result.path})
 
-    select_dir_text = ft.Text(
-        value="Select the directory where the file with time will be saved",
-        text_align="center"
-    )
     select_dir_btn = ft.ElevatedButton(
-        text="Select directory", 
-        on_click= lambda _: directory_selector.save_file(
-            file_name="study_time",
-            initial_directory=dirname(__file__)
+        text="Save to",
+        icon=ft.icons.FOLDER, 
+        on_click=lambda _: directory_selector.save_file(
+            file_name="study_time", 
+            initial_directory=getcwd()
         )
     )
-    dialog_row = ft.Row(
-        controls=[select_dir_text, select_dir_btn],
-        wrap=True,
-        alignment="center"
+
+    page.add(directory_selector)
+    page.controls.append(
+        ft.Row(
+            controls=[
+                ft.Container(
+                    content=select_dir_btn,
+                    expand=True,
+                    alignment=ft.alignment.top_right
+                )
+            ],
+        )
     )
-    close_dialog_btn = ft.IconButton(icon=ft.icons.CLOSE, on_click=close_menu)
-    dialog_menu = ft.AlertDialog(
-        modal=True,
-        actions=[close_dialog_btn,dialog_row,directory_selector],
-        actions_alignment=ft.MainAxisAlignment.CENTER,
-        actions_padding=20
-    )
-    menu_btn = ft.IconButton(icon=ft.icons.QUESTION_MARK, on_click=open_menu)
-    page.appbar = ft.AppBar(actions=[menu_btn])
+ 
     

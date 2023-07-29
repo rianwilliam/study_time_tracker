@@ -1,5 +1,6 @@
 from tkinter import Tk
 from flet import Page, ThemeMode
+from flet import padding
 
 def window_conf(page: Page) -> None:
     root = Tk()
@@ -8,12 +9,12 @@ def window_conf(page: Page) -> None:
     screen_height = page.window_height
     root.destroy()
     
+    page.window_center()
     page.title = "Study hours"
     page.theme_mode = ThemeMode.DARK
-    page.window_center()
-    page.window_max_width = int(screen_width / 3.1)
-    page.window_max_height = int(screen_height / 1.9)
-    page.window_min_width = int(screen_width / 3)
-    page.window_min_height = int(screen_height / 1.8)
+    page.window_max_width = int(screen_width / 3.9)
+    page.window_max_height = int(screen_height / 2.0)
+    page.window_min_width = int(screen_width / 3.8)
+    page.window_min_height = int(screen_height / 1.9)
 
 
