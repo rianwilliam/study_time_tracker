@@ -21,6 +21,10 @@ def sum_time(saved_time: str, time: str) -> str:
 
 def save_time(time) -> None:
     actual_date = date.today().strftime("%d/%m/%Y")
+    week_days = date.weekday(date.today())
+    days = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"]
+    actual_week_day = days[week_days]
+
     json_data = get_json_data()
     time_file_path = json_data["save_time_dir"]
 
@@ -35,4 +39,4 @@ def save_time(time) -> None:
                     file.writelines(lines)
                     
     with open(time_file_path, "a") as file:
-        file.write(f"{actual_date}: {time} \n")
+        file.write(f"{actual_date} - {actual_week_day}: {time} \n")

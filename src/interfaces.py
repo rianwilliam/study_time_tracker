@@ -84,8 +84,8 @@ class Timer:
             text="Save time", 
             on_click=self.get_time, 
             visible=False, 
-            bgcolor=ft.colors.WHITE, 
-            color=ft.colors.BLACK
+            bgcolor=ft.colors.LIGHT_BLUE, 
+            color=ft.colors.WHITE
         )
         self.reset_btn = ft.ElevatedButton(
             text="Reset",  
@@ -133,8 +133,6 @@ def conf_menu(page: ft.Page):
             initial_directory=getcwd()
         )
     )
-
-    page.add(directory_selector)
     page.controls.append(
         ft.Row(
             controls=[
@@ -143,8 +141,9 @@ def conf_menu(page: ft.Page):
                     expand=True,
                     alignment=ft.alignment.top_right
                 )
-            ],
+            ]
         )
     )
+    page.add(directory_selector)
  
     

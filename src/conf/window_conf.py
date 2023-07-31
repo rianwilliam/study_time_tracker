@@ -10,6 +10,7 @@ def window_conf(page: Page) -> None:
     root.destroy()
     
     page.window_center()
+    page.spacing = 1
     page.title = "Study hours"
     page.theme_mode = ThemeMode.DARK
     page.window_max_width = int(screen_width / 3.9)
