@@ -1,8 +1,9 @@
 import flet as ft
 import time
 from os import getcwd
-from src.time_data import save_time
+from src.time_control import save_time
 from src.json_manager import save_in_json
+from src.widgets.study_chart import create_study_chart
 
 class Timer:
 
@@ -120,30 +121,55 @@ class Timer:
         )
         return self.main_container
 
+class StudyGraph:
+
+    def __init__(self) -> None:
+        pass
+
+class DirectorySelector:
+
+    def __init__(self, page: ft.Page) -> None:
+        self.directory_selector = ft.FilePicker()
+        self.directory_selector.on_result = self.file_picker_result
+        self.page = page
+        self.page.add(self.directory_selector)
+
+    def file_picker_result(self,e):
+        save_in_json({"save_time_dir": self.directory_selector.result.path})
+
+    def dir_btn(self):
+        self.select_dir_btn = ft.IconButton(
+            icon=ft.icons.SAVE_AS,
+            icon_color=ft.colors.WHITE,
+            bgcolor=ft.colors.BROWN,
+            on_click=lambda _: self.directory_selector.save_file(
+                file_name="study_time", 
+                initial_directory=getcwd()
+            )
+        )
+        return self.select_dir_btn
+
 def conf_menu(page: ft.Page):
 
-    directory_selector = ft.FilePicker()
-    directory_selector.on_result = lambda _: save_in_json({"save_time_dir": directory_selector.result.path})
-
-    select_dir_btn = ft.ElevatedButton(
-        text="Save to",
-        icon=ft.icons.FOLDER, 
-        on_click=lambda _: directory_selector.save_file(
-            file_name="study_time", 
-            initial_directory=getcwd()
-        )
+    directory_selector = DirectorySelector(page)
+    conf_btn = ft.IconButton(
+        icon=ft.icons.BAR_CHART,
+        icon_color=ft.colors.WHITE,
+        bgcolor=ft.colors.BROWN,
+        on_click=create_study_chart
     )
+    
     page.controls.append(
         ft.Row(
             controls=[
                 ft.Container(
-                    content=select_dir_btn,
-                    expand=True,
-                    alignment=ft.alignment.top_right
+                    content=conf_btn
+                ),
+                ft.Container(
+                    content=directory_selector.dir_btn(),
                 )
-            ]
+            ],
+            alignment=ft.MainAxisAlignment.SPACE_AROUND
         )
     )
-    page.add(directory_selector)
- 
     

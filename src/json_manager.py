@@ -7,7 +7,7 @@ file_json_name = "study_data.json"
 JSON_PATH = os.path.join(user_dir, file_json_name)
 study_file_name = "study_time.txt"
 
-def make_json() -> None:
+def create_json() -> None:
     if not os.path.exists(JSON_PATH):
         with open(JSON_PATH, "w") as file:
             json.dump(
@@ -25,3 +25,9 @@ def get_json_data() -> Dict:
     with open(JSON_PATH, "r") as file:
         data = json.load(file)
     return data
+
+def get_file_time_dir():
+    with open(JSON_PATH, "r") as file:
+        data = json.load(file)
+        path = data.get("save_time_dir")
+    return  path
