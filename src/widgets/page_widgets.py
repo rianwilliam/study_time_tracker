@@ -3,7 +3,7 @@ import time
 from os import getcwd
 from src.time_control import save_time
 from src.json_manager import save_in_json
-from src.widgets.study_chart import create_study_chart
+from src.widgets.charts import create_study_chart
 
 class Timer:
 
@@ -12,7 +12,7 @@ class Timer:
         self.seconds = 0
         self.minutes = 0
         self.hours = 0
-    
+
     def render_time(self, s: int, m: int, h: int) -> None:
         self.display.value = f"{h:02d}:{m:02d}:{s:02d}"
         self.display.update()
@@ -36,7 +36,7 @@ class Timer:
         widget.visible = visible
         widget.update()
 
-    def stop(self, e) -> None:
+    def stop(self, e=None) -> None:
         self.on = False
         self.seconds -= 1
         self.change_visibility_widget(self.save_file_btn, visible=True)
@@ -44,7 +44,7 @@ class Timer:
         self.change_state_widget(self.stop_btn, disabled=True)
         self.main_column.update()
 
-    def start(self, e) -> None:
+    def start(self, e=None) -> None:
         self.on = True
         self.change_visibility_widget(self.save_file_btn, visible=False)
         self.change_state_widget(self.stop_btn, disabled=False)
@@ -121,11 +121,6 @@ class Timer:
         )
         return self.main_container
 
-class StudyGraph:
-
-    def __init__(self) -> None:
-        pass
-
 class DirectorySelector:
 
     def __init__(self, page: ft.Page) -> None:
@@ -148,22 +143,70 @@ class DirectorySelector:
             )
         )
         return self.select_dir_btn
+#! Consertar o dialog
+#! Colocar o método de add no timer, igual fiz na classe abaixo
+#! Consertar o alinhamento do dialog
+#! Trocar o icone de abrir o dialog para ADD_CHART 
+
+class DialogChart:
+
+    def __init__(self, page: ft.Page) -> None:
+        self.page = page
+
+    def widgets(self):
+        self.bar_chart = ft.ElevatedButton(
+            text="bar",
+            icon=ft.icons.BAR_CHART,
+            on_click=lambda _: create_study_chart("bar")
+        )
+        self.plot_chart = ft.ElevatedButton(
+            text="plot",
+            icon=ft.icons.AREA_CHART,
+            on_click=lambda _: create_study_chart("plot")
+        )
+
+    def add_dialog(self):
+        self.widgets()
+        self.bottom_sheet = ft.BottomSheet(
+            ft.Column(
+                controls=[
+                    ft.Text("Choose view mode", text_align=ft.alignment.center),
+                    ft.Row(
+                        controls=[
+                            self.bar_chart,
+                            self.plot_chart
+                        ],
+                        alignment=ft.MainAxisAlignment.SPACE_AROUND,
+                    ),
+                ],
+                height=(self.page.window_height // 6),
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                alignment=ft.MainAxisAlignment.CENTER
+            )
+        )
+        return self.bottom_sheet
+
+    def open_dialog(self,e):
+        self.bottom_sheet.open = True
+        self.page.update()
 
 def conf_menu(page: ft.Page):
+    dialog_chart = DialogChart(page)
+    page.banner = dialog_chart.add_dialog()
 
     directory_selector = DirectorySelector(page)
-    conf_btn = ft.IconButton(
-        icon=ft.icons.BAR_CHART,
+    chart_btn = ft.IconButton(
+        icon=ft.icons.ADD_CHART,
         icon_color=ft.colors.WHITE,
         bgcolor=ft.colors.BROWN,
-        on_click=create_study_chart
+        on_click=dialog_chart.open_dialog
     )
     
     page.controls.append(
         ft.Row(
             controls=[
                 ft.Container(
-                    content=conf_btn
+                    content=chart_btn
                 ),
                 ft.Container(
                     content=directory_selector.dir_btn(),

@@ -1,6 +1,5 @@
 from tkinter import Tk
 from flet import Page, ThemeMode
-from flet import padding
 
 def window_conf(page: Page) -> None:
     root = Tk()

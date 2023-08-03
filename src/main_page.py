@@ -7,7 +7,6 @@ def main(page: ft.Page) -> None:
     window_conf(page)
     create_json()
     timer = Timer()
-
     conf_menu(page)
     page.add(timer.widgets())
     page.update()
