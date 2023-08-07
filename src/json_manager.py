@@ -1,3 +1,4 @@
+""""""
 import os
 import json
 from typing import Dict
@@ -26,8 +27,8 @@ def get_json_data() -> Dict:
         data = json.load(file)
     return data
 
-def get_file_time_dir():
+def get_file_time_dir() -> str:
     with open(JSON_PATH, "r") as file:
         data = json.load(file)
         path = data.get("save_time_dir")
-    return  path
+    return path

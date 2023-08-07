@@ -9,7 +9,7 @@ def format_time(time: str) -> List[int]:
     return [int(x) for x in formatted_time]
 
 def sum_time(saved_time: str, time: str) -> str:
-    saved_time = re.findall(r"[0-9]\:[0-9]{2}\:[0-9]{2}", saved_time)[0]
+    saved_time = re.findall(r"[0-9]+\:[0-9]+\:[0-9]+", saved_time)[0]
     saved_h, saved_m, saved_s = format_time(saved_time)
     h, m, s = format_time(time)
 
@@ -21,7 +21,15 @@ def sum_time(saved_time: str, time: str) -> str:
 
 def save_time(time) -> None:
     current_date = date.today().strftime("%d/%m/%Y")
-    days = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"]
+    days = [
+        "Segunda", 
+        "Terça", 
+        "Quarta", 
+        "Quinta", 
+        "Sexta", 
+        "Sábado", 
+        "Domingo"
+    ]
     current_week_day = days[date.weekday(date.today())]
 
     time_file_path = get_file_time_dir()

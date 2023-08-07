@@ -61,7 +61,7 @@ class Timer:
             time.sleep(1)
             self.render_time(self.seconds,self.minutes,self.hours)
 
-    def widgets(self):
+    def widgets(self) -> ft.Container:
         self.display = ft.Text(value="00:00:00",size=40,color=ft.colors.BLACK)
         self.timer_container = ft.Container(
             content=self.display,
@@ -132,7 +132,7 @@ class DirectorySelector:
     def file_picker_result(self,e):
         save_in_json({"save_time_dir": self.directory_selector.result.path})
 
-    def dir_btn(self):
+    def dir_btn(self) -> ft.IconButton:
         self.select_dir_btn = ft.IconButton(
             icon=ft.icons.SAVE_AS,
             icon_color=ft.colors.WHITE,
@@ -143,17 +143,13 @@ class DirectorySelector:
             )
         )
         return self.select_dir_btn
-#! Consertar o dialog
-#! Colocar o método de add no timer, igual fiz na classe abaixo
-#! Consertar o alinhamento do dialog
-#! Trocar o icone de abrir o dialog para ADD_CHART 
 
 class DialogChart:
 
     def __init__(self, page: ft.Page) -> None:
         self.page = page
 
-    def widgets(self):
+    def widgets(self) -> None:
         self.bar_chart = ft.ElevatedButton(
             text="bar",
             icon=ft.icons.BAR_CHART,
@@ -165,7 +161,7 @@ class DialogChart:
             on_click=lambda _: create_study_chart("plot")
         )
 
-    def add_dialog(self):
+    def add_dialog(self) -> ft.BottomSheet:
         self.widgets()
         self.bottom_sheet = ft.BottomSheet(
             ft.Column(
@@ -186,11 +182,11 @@ class DialogChart:
         )
         return self.bottom_sheet
 
-    def open_dialog(self,e):
+    def open_dialog(self,e) -> None:
         self.bottom_sheet.open = True
         self.page.update()
 
-def conf_menu(page: ft.Page):
+def conf_menu(page: ft.Page) -> None:
     dialog_chart = DialogChart(page)
     page.banner = dialog_chart.add_dialog()
 
