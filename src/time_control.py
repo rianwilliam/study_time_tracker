@@ -52,13 +52,13 @@ def get_current_week_day() -> str:
         - week_day (str): Day of the week spelled out
     """
     week = [
-            "Segunda", 
-            "Terça", 
-            "Quarta", 
-            "Quinta", 
-            "Sexta", 
-            "Sábado", 
-            "Domingo"
+            "Monday", 
+            "Tuesday", 
+            "Wednesday", 
+            "Thursday", 
+            "Friday", 
+            "Saturday", 
+            "Sunday"
         ]
     week_day = week[date.weekday(date.today())]
     return week_day
