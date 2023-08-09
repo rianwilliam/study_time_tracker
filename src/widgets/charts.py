@@ -3,6 +3,8 @@ Here the graph will be built to visualize the hours saved in
 each day of use of the app
 """
 import re
+import os
+from PIL import Image
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from src.json_manager import get_time_data
@@ -41,8 +43,6 @@ def create_study_chart(chart_type: str) -> None:
     dates = re.findall(r"[0-9]+\/[0-9]+\/[0-9]+", " ".join(time_data))
     times = re.findall(r"[0-9]+\:[0-9]+\:[0-9]+", " ".join(time_data))
     hours = extract_hours(times)
-
-    plt.rcParams["toolbar"] = "None"
     fig, ax = plt.subplots()
 
     match chart_type:
@@ -57,8 +57,10 @@ def create_study_chart(chart_type: str) -> None:
     plt.ylim(0, 24)
     plt.xlabel("Datas")
     plt.ylabel("Horas")
-    plt.title('Rendimento de estudo')
+    plt.title("Rendimento de estudo")
     plt.tight_layout()
-    plt.show()
-
-
+    fig_name = "chart.png"
+    plt.savefig(fig_name)
+    img1 = Image.open(fig_name)
+    img1.show()
+    os.remove(fig_name)

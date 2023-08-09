@@ -49,6 +49,7 @@ class Timer:
     def change_visibility_widget(self, widget: any, visible: bool) -> None:
         """
         Determines whether or not the widget will be
+        ~~~~~
 
         - Params:
             - widget: A widget from the flat library (Container, Row, IconButton,...)
@@ -56,7 +57,7 @@ class Timer:
         """
         widget.visible = visible
         widget.update()
-    
+
     def render(self, s: int, m: int, h: int) -> None:
         """
         Renders the time on the display every second
