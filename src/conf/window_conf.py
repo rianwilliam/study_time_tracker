@@ -16,7 +16,7 @@ def set_screen_size(page: Page) -> None:
     screen_height = page.window_height
     root.destroy()
     
-    page.title = "Study hours"
+    page.title = "Stopwatch"
     page.theme_mode = ThemeMode.DARK
     page.spacing = 1
     page.window_center()

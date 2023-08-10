@@ -4,13 +4,15 @@ contains the text file directory with the saved time
 """
 import os
 import json
-from typing import Dict, List
+from typing import List
 
-
-USER_DIR = os.path.expanduser("~")  # Get the user's home directory
+JSON_DIR = os.path.expanduser("~")  # Get the user's home directory
 JSON_NAME = "study_data.json"
-JSON_PATH = os.path.join(USER_DIR, JSON_NAME)
-study_file_name = "study_time.txt"
+JSON_PATH = os.path.join(JSON_DIR, JSON_NAME)
+
+TIME_FILE_NAME = "study_time"
+DEFAULT_TIME_DIR = os.path.expanduser("~/Documentos")
+TIME_FILE_PATH = os.path.join(DEFAULT_TIME_DIR, TIME_FILE_NAME)
 
 def create_json() -> None:
     """
@@ -21,7 +23,7 @@ def create_json() -> None:
     if not os.path.exists(JSON_PATH):
         with open(JSON_PATH, "w") as file:
             json.dump(
-                {"save_time_dir": f"{os.getcwd()}/{study_file_name}"}, 
+                {"save_time_dir": TIME_FILE_PATH}, 
                 file, 
                 indent=2
             )
