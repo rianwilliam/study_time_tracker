@@ -1,4 +1,5 @@
 """Perform screen adjustment functions"""
+import platform
 from tkinter import Tk
 from flet import Page, ThemeMode
 
@@ -23,3 +24,5 @@ def set_screen_size(page: Page) -> None:
     page.window_max_height = screen_height//2.0
     page.window_min_width = screen_width//3.8
     page.window_min_height = screen_height//1.9
+    if platform.system() == "Windows":
+        page.window_resizable = False
