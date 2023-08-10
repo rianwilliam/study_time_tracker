@@ -1,9 +1,6 @@
-<div style="display: flex; align-items:center; gap: 10px;">
+<div>
     <h1>Stopwatch for recording time</h1>
-    <img src="https://em-content.zobj.net/source/microsoft-teams/363/nine-oclock_1f558.png" width=50 height=80/>
 </div>
-
-***
 
 ##### This app measures your time and creates graphs.
 ##### It can be used, for example, to mark study hours and follow your performance and progress through graphs.
@@ -14,18 +11,21 @@
 
 </div>
 
-
 ### Requeriments:
 
 <div style="display: flex; gap: 10px;">
-
-[![Static Badge](https://img.shields.io/badge/Flet-blue?logo=flutter&logoColor=white&link=https%3A%2F%2Fflet.dev%2F)](https://flet.dev/)
-
-[![Static Badge](https://img.shields.io/badge/Mathplotlib-darkblue?logoColor=white&link=https%3A%2F%2Fflet.dev%2F)](https://matplotlib.org/)
-
-![Static Badge](https://img.shields.io/badge/Python-3.10.12-blue?logo=python&logoColor=white&link=https%3A%2F%2Fflet.dev%2F)
-
+    <a href="https://flet.dev/">
+        <img src="https://img.shields.io/badge/Flet-blue?logo=flutter&logoColor=white&link=https%3A%2F%2Fflet.dev%2F" />
+    </a>
+    <a href="https://matplotlib.org/">
+        <img src="https://img.shields.io/badge/Mathplotlib-darkblue?logoColor=white&link=https%3A%2F%2Fflet.dev%2F" />
+    </a>
+    <a>
+        <img src="https://img.shields.io/badge/Python-3.10.12-blue?logo=python&logoColor=white&link=https%3A%2F%2Fflet.dev%2F" />
+    </a>
 </div>
+
+<br/>
 
 * To install external libraries run: 
 
@@ -43,12 +43,9 @@ pip install -r requeriments.txt
     - **Chart icon**: Opens the graphics visualization window, being able to choose between bar and line graphs to visualize
 
 #### Available to: 
-<div style="display: flex">
-
-![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
-
-![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
-
+<div style="display: block">
+    <img src="https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white">
+    <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black">
 </div>
 
 #### Social Media:
