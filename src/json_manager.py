@@ -64,14 +64,3 @@ def get_time_data() -> List[str]:
     with open(time_dir, "r") as fl:
         lines = fl.readlines()
     return lines
-
-# def get_json_data() -> Dict:
-#     """
-#     Get data from JSON
-    
-#     - Returns   
-#         - data (dict): dictionary containing directory saved in JSON
-#     """
-#     with open(JSON_PATH, "r") as file:
-#         data = json.load(file)
-#     return data

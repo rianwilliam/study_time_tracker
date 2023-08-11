@@ -20,9 +20,13 @@ def set_screen_size(page: Page) -> None:
     page.theme_mode = ThemeMode.DARK
     page.spacing = 1
     page.window_center()
-    page.window_max_width = screen_width//3.9
-    page.window_max_height = screen_height//2.0
-    page.window_min_width = screen_width//3.8
-    page.window_min_height = screen_height//1.9
-    if platform.system() == "Windows":
+
+    if platform.system() == "Linux":
+        page.window_max_width = screen_width//3.9
+        page.window_max_height = screen_height//2.0
+        page.window_min_width = screen_width//3.8
+        page.window_min_height = screen_height//1.9
+    elif platform.system() == "Windows":
         page.window_resizable = False
+        page.window_width = screen_width//3.8
+        page.window_height = screen_height//1.9

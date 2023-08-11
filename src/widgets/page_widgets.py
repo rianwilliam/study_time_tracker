@@ -280,7 +280,7 @@ class BannerChart:
                         alignment=MainAxisAlignment.SPACE_AROUND,
                     ),
                 ],
-                height=(self.page.window_height//6),
+                height=(self.page.window_height//5),
                 horizontal_alignment=CrossAxisAlignment.CENTER,
                 alignment=MainAxisAlignment.CENTER
             )
