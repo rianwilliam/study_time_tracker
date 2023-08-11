@@ -44,7 +44,6 @@ def create_study_chart(chart_type: str) -> None:
     times = re.findall(r"[0-9]+\:[0-9]+\:[0-9]+", " ".join(time_data))
     hours = extract_hours(times)
     fig, ax = plt.subplots()
-
     match chart_type:
         case "plot":
             ax.plot(dates, hours)
@@ -52,13 +51,14 @@ def create_study_chart(chart_type: str) -> None:
             ax.bar(dates, hours)
 
     ax.xaxis.set_major_locator(mdates.DayLocator(interval=1))
-    ax.set_yticks(range(24)) 
-    plt.xticks(rotation=45)
+    ax.set_yticks(range(24))
+    plt.xticks(rotation=90)
     plt.ylim(0, 24)
     plt.xlabel("Datas")
     plt.ylabel("Horas")
     plt.title("Rendimento de estudo")
     plt.tight_layout()
+    plt.autoscale(True)  # Used for the largest value of the bar to represent its limit
     fig_name = "chart.png"
     plt.savefig(fig_name)
     img1 = Image.open(fig_name)
