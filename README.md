@@ -50,7 +50,7 @@ pip install -r requeriments.txt
     <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black">
 </div>
 
-##### [Download here the executables](https://github.com/rianwilliam/study_time_tracker/releases/tag/1.0.0)
+##### [Download here the executables](https://github.com/rianwilliam/study_time_tracker/tags)
 
 #### Social Media:
 
