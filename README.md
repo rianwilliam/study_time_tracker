@@ -1,4 +1,6 @@
+
 <div>
+    <img src="./assets/clock.png" width=70>
     <h1>Stopwatch for recording time</h1>
 </div>
 
@@ -47,6 +49,8 @@ pip install -r requeriments.txt
     <img src="https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white">
     <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black">
 </div>
+
+##### [Download here the executables](https://github.com/rianwilliam/study_time_tracker/releases/tag/1.0.0)
 
 #### Social Media:
 
